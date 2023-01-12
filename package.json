@@ -1,0 +1,24 @@
+{
+	"name": "vanilla-api",
+	"version": "1.0.0",
+	"description": "## A node based Rest API that does not utilize Express, Nest, or Fastly.",
+	"main": "index.js",
+	"scripts": {
+		"test": "node index.js",
+		"dev": "nodemon index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/FitzroyWoodruff/vanilla-api.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/FitzroyWoodruff/vanilla-api/issues"
+	},
+	"homepage": "https://github.com/FitzroyWoodruff/vanilla-api#readme",
+	"devDependencies": {
+		"nodemon": "^2.0.20"
+	}
+}
