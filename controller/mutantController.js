@@ -39,8 +39,8 @@ async function getData(req, res, id) {
 async function registerMutant(req, res) {
 	try {
 		const mutant = {
-			name: "Peter",
-			codename: "Colosis",
+			name: "Piotr Rasputin",
+			codename: "Colossus",
 			powers: ["Strength"],
 		};
 		const newMutant = Data.create(mutant);
@@ -54,4 +54,5 @@ async function registerMutant(req, res) {
 module.exports = {
 	getDataAll,
 	getData,
+	registerMutant,
 };
