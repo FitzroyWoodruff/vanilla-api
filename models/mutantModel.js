@@ -2,6 +2,8 @@ const data = require("../fakeData/data.json");
 const { v4: uuidv4 } = require("uuid");
 const { writeDataToFile } = require("../utils/utils");
 
+const TAG = "Mutant Model:";
+
 function findAll() {
 	return new Promise((resolve, reject) => {
 		resolve(data);
@@ -20,8 +22,8 @@ function create(mutant) {
 		try {
 			writeDataToFile("./fakeData/data.json", data);
 			console.log(" 👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍");
-		} catch (e) {
-			console.log(" 👎👎👎👎👎👎👎👎👎👎👎👎👎👎👎👎👎👎👎👎👎👎👎 ");
+		} catch (error) {
+			console.log(`${TAG} ${error}`);
 		}
 		resolve(newMutant);
 	});
