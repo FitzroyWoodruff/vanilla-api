@@ -29,8 +29,23 @@ function create(mutant) {
 	});
 }
 
+function update(mid, mutant) {
+	return new Promise((resolve, reject) => {
+		const index = data.findIndex((d) => d.mid === mid);
+		data[index] = { mid, ...mutant };
+		try {
+			writeDataToFile("./fakeData/data.json", data);
+			console.log(`${TAG} Data was written to file...`);
+		} catch (error) {
+			console.log(`${TAG} ${error}`);
+		}
+		resolve(data[index]);
+	});
+}
+
 module.exports = {
 	findAll,
 	findById,
 	create,
+	update,
 };

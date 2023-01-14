@@ -1,5 +1,7 @@
 const Data = require("../models/mutantModel");
 
+const { getMutantData } = require("../utils/utils");
+
 // @desc   Gets all of the mutant data
 // @route  GET /api/data
 async function getDataAll(req, res) {
@@ -38,24 +40,50 @@ async function getData(req, res, id) {
 // @route  POST /api/data
 async function registerMutant(req, res) {
 	try {
-		let body = "";
-		req.on("data", (chunk) => {
-			body += chunk.toString();
-		});
+		const body = await getMutantData(req);
 
-		req.on("end", async () => {
+		const { name, codename, powers } = JSON.parse(body);
+
+		const mutant = {
+			name,
+			codename,
+			powers,
+		};
+
+		const newMutant = await Data.create(mutant);
+		res.writeHead(200, { "Content-Type": "application/json" });
+		return res.end(JSON.stringify(newMutant));
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+// @desc   Update an existing mutant
+// @route  PUT/api/data/:id
+async function updateMutant(req, res, id) {
+	try {
+		const data = await Data.findById(id);
+
+		if (!mutant) {
+			res.writeHead(404, { "Content-Type": "application/json" });
+			res.end(
+				JSON.stringify({ message: "Mutant not found in mutant database" })
+			);
+		} else {
+			const body = await getMutantData(req);
+
 			const { name, codename, powers } = JSON.parse(body);
 
-			const mutant = {
-				name,
-				codename,
-				powers,
+			const mutantData = {
+				name: name || data.name,
+				codename: codename || data.codename,
+				powers: powers || data.powers,
 			};
 
-			const newMutant = await Data.create(mutant);
+			const updatedMutant = await Data.update(id, mutantData);
 			res.writeHead(200, { "Content-Type": "application/json" });
-			return res.end(JSON.stringify(newMutant));
-		});
+			return res.end(JSON.stringify(updatedMutant));
+		}
 	} catch (error) {
 		console.error(error);
 	}
@@ -65,4 +93,5 @@ module.exports = {
 	getDataAll,
 	getData,
 	registerMutant,
+	updateMutant,
 };
