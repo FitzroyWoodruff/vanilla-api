@@ -21,7 +21,7 @@ function create(mutant) {
 		data.push(newMutant);
 		try {
 			writeDataToFile("./fakeData/data.json", data);
-			console.log(" 👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍");
+			console.log(`${TAG} Data was written to file...`);
 		} catch (error) {
 			console.log(`${TAG} ${error}`);
 		}

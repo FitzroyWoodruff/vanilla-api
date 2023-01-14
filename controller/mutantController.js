@@ -38,16 +38,26 @@ async function getData(req, res, id) {
 // @route  POST /api/data
 async function registerMutant(req, res) {
 	try {
-		const mutant = {
-			name: "Piotr Rasputin",
-			codename: "Colossus",
-			powers: ["Strength"],
-		};
-		const newMutant = Data.create(mutant);
-		res.writeHead(200, { "Content-Type": "application/json" });
-		return res.end(JSON.stringify(newMutant));
-	} catch (e) {
-		console.error(e);
+		let body = "";
+		req.on("data", (chunk) => {
+			body += chunk.toString();
+		});
+
+		req.on("end", async () => {
+			const { name, codename, powers } = JSON.parse(body);
+
+			const mutant = {
+				name,
+				codename,
+				powers,
+			};
+
+			const newMutant = await Data.create(mutant);
+			res.writeHead(200, { "Content-Type": "application/json" });
+			return res.end(JSON.stringify(newMutant));
+		});
+	} catch (error) {
+		console.error(error);
 	}
 }
 
