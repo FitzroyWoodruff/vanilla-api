@@ -43,9 +43,23 @@ function update(mid, mutant) {
 	});
 }
 
+function remove(mid) {
+	return new Promise((resolve, reject) => {
+		data = data.filter((d) => d.mid === mid);
+		try {
+			writeDataToFile("./fakeData/data.json", data);
+			console.log(`${TAG} Data was removed from file...`);
+		} catch (error) {
+			console.log(`${TAG} ${error}`);
+		}
+		resolve();
+	});
+}
+
 module.exports = {
 	findAll,
 	findById,
 	create,
 	update,
+	remove,
 };

@@ -89,9 +89,32 @@ async function updateMutant(req, res, id) {
 	}
 }
 
+// @desc   delete an existing mutant
+// @route  DELETE /api/data/:id
+async function deleteMutant(req, res, id) {
+	try {
+		const data = await Data.findById(id);
+
+		if (!mutant) {
+			res.writeHead(404, { "Content-Type": "application/json" });
+			res.end(
+				JSON.stringify({ message: "Mutant not found in mutant database" })
+			);
+		} else {
+			await Data.remove(id);
+
+			res.writeHead(200, { "Content-Type": "application/json" });
+			res.end(JSON.stringify({ message: `Mutant ${id} was deleted` }));
+		}
+	} catch (error) {
+		console.error(error);
+	}
+}
+
 module.exports = {
 	getDataAll,
 	getData,
 	registerMutant,
 	updateMutant,
+	deleteMutant,
 };
