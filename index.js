@@ -4,6 +4,7 @@ const {
 	getData,
 	registerMutant,
 	updateMutant,
+	deleteMutant,
 } = require("./controller/mutantController");
 
 //NOTE: mutant registration app api

@@ -43,11 +43,15 @@ function update(mid, mutant) {
 	});
 }
 
-function remove(mid) {
+function remove(id) {
 	return new Promise((resolve, reject) => {
-		data = data.filter((d) => d.mid === mid);
+		console.log("🚩🚩🚩🚩🚩🚩🚩🚩🚩 ");
+		console.log(data.mid);
+		console.log("🚩🚩🚩🚩🚩🚩🚩🚩🚩 ");
+		const dataf = data.filter((d) => d.mid === id);
+		console.log(dataf);
 		try {
-			writeDataToFile("./fakeData/data.json", data);
+			writeDataToFile("./fakeData/data.json", dataf);
 			console.log(`${TAG} Data was removed from file...`);
 		} catch (error) {
 			console.log(`${TAG} ${error}`);

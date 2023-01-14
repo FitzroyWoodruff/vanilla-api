@@ -95,7 +95,7 @@ async function deleteMutant(req, res, id) {
 	try {
 		const data = await Data.findById(id);
 
-		if (!mutant) {
+		if (!data) {
 			res.writeHead(404, { "Content-Type": "application/json" });
 			res.end(
 				JSON.stringify({ message: "Mutant not found in mutant database" })
