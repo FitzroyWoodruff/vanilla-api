@@ -48,7 +48,7 @@ function remove(id) {
 		console.log("🚩🚩🚩🚩🚩🚩🚩🚩🚩 ");
 		console.log(data.mid);
 		console.log("🚩🚩🚩🚩🚩🚩🚩🚩🚩 ");
-		const dataf = data.filter((d) => d.mid === id);
+		const dataf = data.filter((d) => d.mid !== id);
 		console.log(dataf);
 		try {
 			writeDataToFile("./fakeData/data.json", dataf);
