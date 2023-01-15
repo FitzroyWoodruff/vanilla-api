@@ -29,13 +29,13 @@ function create(mutant) {
 	});
 }
 
-function update(mid, mutant) {
+function update(id, mutant) {
 	return new Promise((resolve, reject) => {
-		const index = data.findIndex((d) => d.mid === mid);
-		data[index] = { mid, ...mutant };
+		const index = data.findIndex((d) => d.mid === id);
+		data[index] = { id, ...mutant };
 		try {
 			writeDataToFile("./fakeData/data.json", data);
-			console.log(`${TAG} Data was written to file...`);
+			console.log(`${TAG} Data was updated written to file...`);
 		} catch (error) {
 			console.log(`${TAG} ${error}`);
 		}
@@ -45,9 +45,6 @@ function update(mid, mutant) {
 
 function remove(id) {
 	return new Promise((resolve, reject) => {
-		console.log("🚩🚩🚩🚩🚩🚩🚩🚩🚩 ");
-		console.log(data.mid);
-		console.log("🚩🚩🚩🚩🚩🚩🚩🚩🚩 ");
 		const dataf = data.filter((d) => d.mid !== id);
 		console.log(dataf);
 		try {
